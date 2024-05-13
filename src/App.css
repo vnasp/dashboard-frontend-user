@@ -1,3 +1,46 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  @apply h-screen w-screen flex items-center justify-center bg-slate-100;
+}
+
+#root {
+  @apply h-full w-full;
+}
+.btn {
+  @apply rounded-lg shadow-lg font-bold text-white flex justify-between px-4 py-2;
+}
+.btn--primary {
+  @apply bg-acustica-primary hover:bg-acustica-hover text-xl px-6 py-4 ;
+}
+.btn--secondary {
+  @apply bg-acustica-secondary space-x-2 text-sm;
+}
+
+.navigation {
+  @apply fixed top-0 h-screen w-full bg-acustica-primary border-r;
+  @apply fixed md:w-4/12 lg:ml-0 lg:w-[20%] xl:w-[18%] 2xl:w-[15%];
+  @apply flex flex-col justify-start items-center;
+}
+
+.navigation__logo {
+  @apply flex justify-center py-4;
+}
+
+.navigation__menu {
+  @apply space-y-2 tracking-wide mt-8 text-white;
+}
+.navigation__logout {
+  @apply absolute bottom-5 px-6 -mx-6 pt-4 flex justify-center items-center border-t;
+}
+.navigation__button {
+  @apply px-4 py-3 flex items-center justify-center space-x-4 rounded-md text-white border-0 bg-acustica-secondary;
+}
+.navigation__link {
+  @apply px-4 py-3 flex items-center space-x-4 rounded-md text-white relative;
+}
+.navigation__link--active {
+  @apply bg-gradient-to-r from-sky-600 to-cyan-400;
+}
