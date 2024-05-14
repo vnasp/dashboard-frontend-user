@@ -108,8 +108,7 @@ export default function NPSGraph() {
   ];
 
   const layout = {
-    width: 1000,
-    height: 440,
+    autosize: true,
     title: {
       text: "NPS Global vs Tiempo por Canal",
       font: {
@@ -152,12 +151,15 @@ export default function NPSGraph() {
   };
 
   return (
+    <div className="rotate-90 md:rotate-0 lg:w-11/12">
     <Plot
       data={data}
       layout={layout}
       config={{
         displayModeBar: true,
       }}
+      className="lg:h-full lg:w-full"
     />
+    </div>
   );
 }
