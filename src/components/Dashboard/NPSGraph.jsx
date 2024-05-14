@@ -134,7 +134,7 @@ export default function NPSGraph() {
     },
     yaxis: {
       title: "NPS Global (dB)",
-      showgrid: false,
+      showgrid: true,
       automargin: true,
       zeroline: true,
       showline: true,
