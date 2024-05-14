@@ -13,7 +13,7 @@ body {
   @apply rounded-lg shadow-lg font-bold text-white flex justify-between px-4 py-2;
 }
 .btn--primary {
-  @apply bg-acustica-primary hover:bg-acustica-hover text-xl px-6 py-4 ;
+  @apply bg-acustica-primary hover:bg-acustica-hover text-xl px-6 py-4;
 }
 .btn--secondary {
   @apply bg-acustica-secondary space-x-2 text-sm;
@@ -43,4 +43,16 @@ body {
 }
 .navigation__link--active {
   @apply bg-acustica-secondary;
+}
+
+/* Projects View */
+.projects__view{
+  @apply flex flex-col min-h-screen gap-4;
+}
+.projects__selector {
+  @apply p-8 rounded-xl border border-gray-200 bg-white;
+}
+
+.projects__graph {
+  @apply py-6 rounded-xl border border-gray-200 bg-white text-center flex-grow;
 }
