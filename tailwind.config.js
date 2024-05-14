@@ -9,7 +9,7 @@ export default {
       colors: {
         'acustica-primary': '#47bfca',
         'acustica-secondary': '#fc6e55',
-        'acustica-hover': '#092d47',
+        'acustica-dark': '#07253B',
       }
     }
   },
