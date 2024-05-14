@@ -1,93 +1,146 @@
-import stations from '../../data/StationsData';
-
-import { useState, useEffect } from 'react';
-import Select from 'react-select';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import { startOfToday, subDays, subWeeks, subMonths } from 'date-fns';
+import stations from "../../data/StationsData";
+import { useState, useContext } from "react";
+import Select from "react-select";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { format, startOfToday, subDays, subWeeks, subMonths } from "date-fns";
+import { useDataContext } from "../../context/DataContext";
 
 export default function DeviceSelector() {
-    const [selectedStations, setSelectedStations] = useState([]);
-    const [selectedDevices, setSelectedDevices] = useState([]);
-    const [selectedTimeRange, setSelectedTimeRange] = useState(null);
-    const [customDateRange, setCustomDateRange] = useState([null, null]);
-    const [startDate, endDate] = customDateRange;
+  const { graphParameters, setGraphParameters } = useDataContext();
+  const [selectedStation, setSelectedStation] = useState(null);
+  const [selectedDevice, setSelectedDevice] = useState(null);
+  const [selectedDates, setSelectedDates] = useState([null, null]);
+  const [selectedTimeRange, setSelectedTimeRange] = useState(null);
 
-    useEffect(() => {
-        // Actualiza los dispositivos basado en las estaciones seleccionadas
-        const allSelectedDevices = selectedStations.flatMap(station =>
-            station.devices.map(device => ({ ...device, label: `Dispositivo ${device.id}` }))
-        );
-        setSelectedDevices(prevDevices =>
-            prevDevices.filter(device => allSelectedDevices.some(sDevice => sDevice.id === device.id))
-        );
-    }, [selectedStations]);
+  // Define las opciones de las estaciones a partir de los datos importados
+  const stationOptions = stations.map((station) => ({
+    value: station.id,
+    label: `Estación ${station.id}`,
+    devices: station.devices,
+  }));
 
-    const handleStationChange = selectedOptions => {
-        setSelectedStations(selectedOptions);
-    };
+  const handleStationChange = (selectedOption) => {
+    setSelectedStation(selectedOption);
+    setSelectedDevice(null);
+    setSelectedTimeRange(null);
+    setSelectedDates([null, null]);
 
-    const handleDeviceChange = selectedOptions => {
-        setSelectedDevices(selectedOptions);
-    };
-
-    const handleTimeRangeChange = selectedOption => {
-        setSelectedTimeRange(selectedOption);
-        if (selectedOption.id !== 'custom') {
-            setCustomDateRange([null, null]); 
-        }
-    };
-
-    const stationOptions = stations.map(station => ({
-        value: station.id,
-        label: `Estación ${station.id}`,
-        devices: station.devices
+    setGraphParameters((prev) => ({
+      ...prev,
+      stations: selectedOption ? [selectedOption.value] : [],
+      devices: [],
+      dateRange: { start: null, end: null },
     }));
+  };
 
-    const timeOptions = [
-      { id: 'today', label: 'Hoy', value: { start: startOfToday(), end: new Date() } },
-      { id: 'lastWeek', label: 'Última Semana', value: { start: subWeeks(startOfToday(), 1), end: new Date() } },
-      { id: 'last30Days', label: 'Últimos 30 días', value: { start: subDays(startOfToday(), 30), end: new Date() } },
-      { id: 'last90Days', label: 'Últimos 90 días', value: { start: subMonths(startOfToday(), 3), end: new Date() } },
-      { id: 'custom', label: 'Personalizado', value: null }
+  const handleDeviceChange = (selectedOption) => {
+    setSelectedDevice(selectedOption);
+
+    setGraphParameters((prev) => ({
+      ...prev,
+      devices: selectedOption ? [selectedOption.value] : [],
+    }));
+  };
+
+  const handleTimeRangeChange = (option) => {
+    setSelectedTimeRange(option);
+    if (option.id === "custom") {
+      // Resetear las fechas para indicar que se pueden seleccionar nuevas
+      setSelectedDates([null, null]);
+    } else {
+      const [start, end] = option.value;
+      setSelectedDates([start, end]);
+      setGraphParameters((prev) => ({
+        ...prev,
+        dateRange: {
+          start: format(start, "yyyy-MM-dd"),
+          end: format(end, "yyyy-MM-dd"),
+        },
+      }));
+    }
+  };
+
+  const handleDateChange = (dates) => {
+    setSelectedDates(dates);
+    if (dates[0] && dates[1]) {
+      setGraphParameters((prev) => ({
+        ...prev,
+        dateRange: {
+          start: format(dates[0], "yyyy-MM-dd"),
+          end: format(dates[1], "yyyy-MM-dd"),
+        },
+      }));
+    }
+  };
+
+  const timeOptions = [
+    { id: "today", label: "Hoy", value: [startOfToday(), new Date()] },
+    {
+      id: "lastWeek",
+      label: "Última Semana",
+      value: [subWeeks(startOfToday(), 1), new Date()],
+    },
+    {
+      id: "last30Days",
+      label: "Últimos 30 días",
+      value: [subDays(startOfToday(), 30), new Date()],
+    },
+    {
+      id: "last90Days",
+      label: "Últimos 90 días",
+      value: [subMonths(startOfToday(), 3), new Date()],
+    },
+    { id: "custom", label: "Personalizado", value: null },
   ];
 
-    return (
-      <section className="grid grid-cols-3 gap-6">
+  return (
+    <section className="grid grid-cols-3 gap-4">
       <Select
-          id="station-select"
-          onChange={handleStationChange}
-          options={stationOptions}
-          placeholder="Seleccione estaciones"
-          isMulti
+        id="station-select"
+        onChange={handleStationChange}
+        options={stationOptions}
+        placeholder="Seleccione una estación"
+        value={selectedStation}
       />
-
       <Select
-          id="device-select"
-          onChange={handleDeviceChange}
-          options={selectedStations.flatMap(station => station.devices.map(device => ({ value: device.id, label: `Dispositivo ${device.id}` })))}
-          placeholder="Todos los dispositivos"
-          isMulti
-          isDisabled={!selectedStations.length}
+        id="device-select"
+        onChange={handleDeviceChange}
+        options={
+          selectedStation
+            ? selectedStation.devices.map((device) => ({
+                value: device.id,
+                label: `Dispositivo ${device.id}`,
+              }))
+            : []
+        }
+        placeholder="Seleccione un dispositivo"
+        value={selectedDevice}
+        isDisabled={!selectedStation}
       />
-
-      <Select
-          id="time-range-select"
+      <div>
+        <Select
+          id="time-select"
           onChange={handleTimeRangeChange}
           options={timeOptions}
-          placeholder="Seleccione un rango de tiempo"
-      />
-
-      {selectedTimeRange && selectedTimeRange.id === 'custom' && (
+          placeholder="Seleccione un rango de tiempo rápido"
+          value={selectedTimeRange}
+          getOptionLabel={(option) => option.label}
+          getOptionValue={(option) => option.id}
+          isDisabled={!selectedStation}
+        />
+        {selectedTimeRange && selectedTimeRange.id === "custom" && (
           <DatePicker
-              selectsRange={true}
-              startDate={startDate}
-              endDate={endDate}
-              onChange={setCustomDateRange}
-              isClearable={true}
-              placeholderText="Selecciona un rango de fechas"
+            selectsRange={true}
+            startDate={selectedDates[0]}
+            endDate={selectedDates[1]}
+            onChange={handleDateChange}
+            isClearable={true}
+            placeholderText="Selecciona un rango de fechas"
+            dateFormat="yyyy-MM-dd"
           />
-      )}
-  </section>
-    );
-  }
+        )}
+      </div>
+    </section>
+  );
+}
