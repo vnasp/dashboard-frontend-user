@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: '/src/data/',
+  baseURL: '/acustica-frontend-user/',
   timeout: 1000,
   headers: {
     'Content-Type': 'application/json',
