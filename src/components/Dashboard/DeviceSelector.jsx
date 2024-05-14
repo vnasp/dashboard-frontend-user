@@ -94,49 +94,73 @@ export default function DeviceSelector() {
 
   return (
     <section className="devices-selectors">
-      <Select
-        id="station-select"
-        onChange={handleStationChange}
-        options={stationOptions}
-        placeholder="Seleccione una estación"
-        value={selectedStation}
-      />
-      <Select
-        id="device-select"
-        onChange={handleDeviceChange}
-        options={
-          selectedStation
-            ? selectedStation.devices.map((device) => ({
-                value: device.id,
-                label: `Dispositivo ${device.id}`,
-              }))
-            : []
-        }
-        placeholder="Seleccione un dispositivo"
-        value={selectedDevice}
-        isDisabled={!selectedStation}
-      />
-      <div>
+      <div className="flex flex-col">
+        <label htmlFor="station-select" id="station-label">
+          Selecciona una estación
+        </label>
+        <Select
+          id="station-select"
+          onChange={handleStationChange}
+          options={stationOptions}
+          placeholder="Listado de estaciones"
+          value={selectedStation}
+          aria-labelledby="station-label"
+        />
+      </div>
+      <div className="flex flex-col">
+        <label htmlFor="device-select" id="device-label">
+          Selecciona un dispositivo
+        </label>
+        <Select
+          id="device-select"
+          onChange={handleDeviceChange}
+          options={
+            selectedStation
+              ? selectedStation.devices.map((device) => ({
+                  value: device.id,
+                  label: `Dispositivo ${device.id}`,
+                }))
+              : []
+          }
+          placeholder="Listado de dispositivos"
+          value={selectedDevice}
+          isDisabled={!selectedStation}
+          aria-labelledby="device-label"
+        />
+      </div>
+      <div className="flex flex-col">
+        <label htmlFor="time-select" id="time-label">
+          Selecciona un rango de tiempo rápido
+        </label>
         <Select
           id="time-select"
           onChange={handleTimeRangeChange}
           options={timeOptions}
-          placeholder="Seleccione un rango de tiempo rápido"
+          placeholder="Periodo a consultar"
           value={selectedTimeRange}
           getOptionLabel={(option) => option.label}
           getOptionValue={(option) => option.id}
           isDisabled={!selectedStation}
+          aria-labelledby="time-label"
         />
         {selectedTimeRange && selectedTimeRange.id === "custom" && (
-          <DatePicker
-            selectsRange={true}
-            startDate={selectedDates[0]}
-            endDate={selectedDates[1]}
-            onChange={handleDateChange}
-            isClearable={true}
-            placeholderText="Selecciona un rango de fechas"
-            dateFormat="yyyy-MM-dd"
-          />
+          <>
+            <div className="fle flex-col">
+              <label htmlFor="date-picker" id="date-picker-label">
+                Selecciona un rango de fechas
+              </label>
+              <DatePicker
+                selectsRange={true}
+                startDate={selectedDates[0]}
+                endDate={selectedDates[1]}
+                onChange={handleDateChange}
+                isClearable={true}
+                placeholderText="Selecciona un rango de fechas"
+                dateFormat="yyyy-MM-dd"
+                aria-labelledby="date-picker-label"
+              />
+            </div>
+          </>
         )}
       </div>
     </section>
