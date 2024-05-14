@@ -1,17 +1,17 @@
 export default function AvatarSection() {
   return (
     <>
-      <div className="mt-8 text-center text-white">
+      <section className="navigation__user">
         <img
           src="./avatar.webp"
           alt="María Pérez"
-          className="w-10 h-10 m-auto rounded-full object-cover lg:w-32 lg:h-32 border-2 border-white"
+          className="navigation__user--img"
         />
-        <h5 className="hidden mt-4 text-xl font-semibold lg:block">
+        <h5 className="navigation__user--name">
           Valentina Muñoz
         </h5>
-        <span className="hidden lg:block">Usuario</span>
-      </div>
+        <span>Usuario</span>
+      </section>
     </>
   );
 }

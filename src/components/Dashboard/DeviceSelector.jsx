@@ -1,19 +1,18 @@
 import stations from "../../data/StationsData";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import Select from "react-select";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import { format, startOfToday, subDays, subWeeks, subMonths } from "date-fns";
 import { useDataContext } from "../../context/DataContext";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function DeviceSelector() {
-  const { graphParameters, setGraphParameters } = useDataContext();
+  const { setGraphParameters } = useDataContext();
   const [selectedStation, setSelectedStation] = useState(null);
   const [selectedDevice, setSelectedDevice] = useState(null);
   const [selectedDates, setSelectedDates] = useState([null, null]);
   const [selectedTimeRange, setSelectedTimeRange] = useState(null);
 
-  // Define las opciones de las estaciones a partir de los datos importados
   const stationOptions = stations.map((station) => ({
     value: station.id,
     label: `Estación ${station.id}`,
@@ -46,7 +45,6 @@ export default function DeviceSelector() {
   const handleTimeRangeChange = (option) => {
     setSelectedTimeRange(option);
     if (option.id === "custom") {
-      // Resetear las fechas para indicar que se pueden seleccionar nuevas
       setSelectedDates([null, null]);
     } else {
       const [start, end] = option.value;
@@ -95,7 +93,7 @@ export default function DeviceSelector() {
   ];
 
   return (
-    <section className="grid grid-cols-3 gap-4">
+    <section className="devices-selectors">
       <Select
         id="station-select"
         onChange={handleStationChange}

@@ -18,22 +18,28 @@ body {
 .btn--secondary {
   @apply bg-acustica-secondary space-x-2 text-sm;
 }
-
 .navigation {
-  @apply fixed top-0 h-screen w-full bg-acustica-primary border-r;
+  @apply fixed top-0 h-screen w-full bg-acustica-primary text-white border-r;
   @apply fixed md:w-4/12 lg:ml-0 lg:w-[20%] xl:w-[18%] 2xl:w-[15%];
   @apply flex flex-col justify-start items-center;
 }
-
 .navigation__logo {
   @apply flex justify-center py-4;
 }
-
+.navigation__user {
+  @apply mt-8 text-center;
+}
+.navigation__user--img {
+  @apply w-10 h-10 m-auto rounded-full object-cover lg:w-32 lg:h-32 border-2 border-white;
+}
+.navigation__user--name {
+  @apply mt-4 text-xl font-semibold lg:block;
+}
 .navigation__menu {
   @apply space-y-2 tracking-wide mt-8 text-white;
 }
 .navigation__logout {
-  @apply absolute bottom-5 px-6 -mx-6 pt-4 flex justify-center items-center border-t;
+  @apply absolute bottom-5 pt-4 border-t space-x-2;
 }
 .navigation__button {
   @apply px-4 py-3 flex items-center justify-center space-x-4 rounded-md text-white border-0 bg-acustica-secondary;
@@ -45,14 +51,51 @@ body {
   @apply bg-acustica-secondary;
 }
 
+/* Dashboard View */
+.dashboard {
+  @apply px-6 pt-6 ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%] h-screen;
+}
+.dashboard__header {
+  @apply flex space-x-4 justify-between items-center mb-4;
+}
+.dashboard__badges {
+  @apply flex space-x-2;
+}
+.dashboard__badge {
+  @apply inline-block text-acustica-hover text-xs  mr-2 px-2.5 py-0.5 rounded;
+  background-color: #a6dfe3;
+}
+.dashboard__project {
+  @apply flex flex-col space-y-2;
+}
+.dashboard__project--title {
+  @apply font-semibold text-2xl text-acustica-hover uppercase;
+}
+.dashboard__views {
+  @apply inline-flex space-x-4;
+}
+
 /* Projects View */
-.projects__view{
-  @apply flex flex-col min-h-screen gap-4;
+.projects__view {
+  @apply flex flex-col max-h-screen gap-4;
 }
 .projects__selector {
   @apply p-8 rounded-xl border border-gray-200 bg-white;
 }
-
 .projects__graph {
-  @apply py-6 rounded-xl border border-gray-200 bg-white text-center flex-grow;
+  @apply py-6 rounded-xl border border-gray-200 bg-white text-center flex flex-col justify-center items-center;
+  height: 70vh;
+}
+
+/* Devices Selectors */
+.devices-selectors {
+  @apply grid grid-cols-3 gap-4;
+}
+
+/* Alerts Messages */
+.alert {
+  @apply flex flex-col justify-center items-center;
+}
+.alerts--info{
+  @apply mt-4 w-full space-x-4 bg-yellow-100 border border-yellow-300 text-yellow-700 px-4 py-3 rounded-lg text-sm;
 }

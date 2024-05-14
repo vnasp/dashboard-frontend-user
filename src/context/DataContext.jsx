@@ -12,7 +12,7 @@ export const DataProvider = ({ children }) => {
       end: null,
     },
   });
-console.log(graphParameters)
+  
   return (
     <DataContext.Provider
       value={{

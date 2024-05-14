@@ -10,20 +10,16 @@ export default function DashboardView() {
 
   return (
     <>
-      <main className="px-6 pt-6">
-        <section className="flex space-x-4 justify-between items-center mb-4">
-          <div className="flex flex-col space-y-2">
-          <h1 className="font-semibold text-2xl text-acustica-hover uppercase">Proyecto 1</h1>
-          <div className="flex space-x-2">
-      <span className="inline-block bg-blue-300 text-white text-xs  mr-2 px-2.5 py-0.5 rounded">
-        Segmento 1
-      </span>
-      <span className="inline-block bg-teal-300 text-white text-xs  mr-2 px-2.5 py-0.5 rounded">
-        Antropológico
-      </span>
-    </div>
-    </div>
-          <div className="inline-flex space-x-4">
+      <main className="dashboard">
+        <section className="dashboard__header">
+          <div className="dashboard__project">
+            <h1 className="dashboard__project--title">Proyecto 1</h1>
+            <div className="dashboard__badges">
+              <span className="dashboard__badge">Segmento 1</span>
+              <span className="dashboard__badge">Antropológico</span>
+            </div>
+          </div>
+          <div className="dashboard__views">
             <button
               className={`btn ${
                 view === "general"
@@ -47,7 +43,6 @@ export default function DashboardView() {
             </button>
           </div>
         </section>
-
         {view === "general" ? <ProjectsView /> : ""}
       </main>
     </>

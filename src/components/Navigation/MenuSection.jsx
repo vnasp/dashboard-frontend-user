@@ -17,20 +17,20 @@ export default function MenuSection() {
       <ul className="navigation__menu">
         <li>
           <NavLink to="/" aria-label="dashboard" className={setActiveclassName}>
-            {<FontAwesomeIcon icon={faChartPie} />}
+            <FontAwesomeIcon icon={faChartPie} />
             <span className="-mr-1 font-medium">Dashboard</span>
           </NavLink>
         </li>
         <li>
           <NavLink to="/menu2" className={setActiveclassName} disabled>
             <FontAwesomeIcon icon={faFolderOpen} />
-            <span className="group-hover:text-white">Por definir</span>
+            <span>Por definir</span>
           </NavLink>
         </li>
         <li>
           <NavLink to="menu3" className={setActiveclassName} disabled>
             <FontAwesomeIcon icon={faFileArrowUp} />
-            <span className="group-hover:text-white">Por definir</span>
+            <span>Por definir</span>
           </NavLink>
         </li>
       </ul>
