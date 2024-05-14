@@ -24,13 +24,13 @@ export default function MenuSection() {
         <li>
           <NavLink to="/menu2" className={setActiveclassName} disabled>
             <FontAwesomeIcon icon={faFolderOpen} />
-            <span className="group-hover:text-white">Menú 2</span>
+            <span className="group-hover:text-white">Por definir</span>
           </NavLink>
         </li>
         <li>
           <NavLink to="menu3" className={setActiveclassName} disabled>
             <FontAwesomeIcon icon={faFileArrowUp} />
-            <span className="group-hover:text-white">Menú 3</span>
+            <span className="group-hover:text-white">Por definir</span>
           </NavLink>
         </li>
       </ul>
