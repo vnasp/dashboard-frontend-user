@@ -7,6 +7,8 @@ export default function LogoSection() {
             src="./logo.webp"
             className="w-36"
             alt="Acustina Marina"
+            width={100}
+            height={100}
           />
         </a>
       </section>

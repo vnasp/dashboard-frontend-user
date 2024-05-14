@@ -23,7 +23,7 @@ export default function DashboardView() {
             <button
               className={`btn ${
                 view === "general"
-                  ? "bg-acustica-primary hover:bg-acustica-hover"
+                  ? "bg-acustica-primary hover:bg-acustica-dark"
                   : "bg-gray-400"
               }`}
               onClick={() => handleViewChange("general")}
@@ -33,7 +33,7 @@ export default function DashboardView() {
             <button
               className={`btn ${
                 view === "category"
-                  ? "bg-acustica-primary hover:bg-acustica-hover"
+                  ? "bg-acustica-primary hover:bg-acustica-dark"
                   : "bg-gray-400"
               }`}
               onClick={() => handleViewChange("category")}

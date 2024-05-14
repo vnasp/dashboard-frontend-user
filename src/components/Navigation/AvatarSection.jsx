@@ -4,13 +4,11 @@ export default function AvatarSection() {
       <section className="navigation__user">
         <img
           src="./avatar.webp"
-          alt="María Pérez"
+          alt="Valentina Muñoz"
           className="navigation__user--img"
         />
-        <h5 className="navigation__user--name">
-          Valentina Muñoz
-        </h5>
-        <span>Usuario</span>
+          <h5 className="navigation__user--name">Valentina Muñoz</h5>
+          <p className="navigation__user--role">Usuario</p>
       </section>
     </>
   );
