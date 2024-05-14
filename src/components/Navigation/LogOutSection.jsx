@@ -2,7 +2,7 @@ export default function LogOutSection() {
   return (
     <>
     <section className="navigation__logout">
-        <button className="btn btn--secondary group">
+        <button className="flex items-center text-white gap-2 group">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5"
