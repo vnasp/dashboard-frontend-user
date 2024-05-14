@@ -36,7 +36,7 @@ body {
   @apply hidden md:block md:mt-0 lg:mt-4 text-xl font-semibold;
 }
 .navigation__user--role {
-  @apply hidden lg:block mt-4 text-xl font-semibold;
+  @apply hidden lg:block;
 }
 .navigation__menu {
   @apply hidden lg:block space-y-2 tracking-wide mt-8 text-white;
