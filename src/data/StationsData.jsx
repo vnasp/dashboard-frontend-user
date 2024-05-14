@@ -1,4 +1,4 @@
-export const stations = [
+const stations = [
   {
     id: 9,
     devices: [
@@ -13,3 +13,5 @@ export const stations = [
     ],
   },
 ];
+
+export default stations;
