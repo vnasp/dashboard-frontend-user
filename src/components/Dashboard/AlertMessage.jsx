@@ -12,7 +12,7 @@ export default function AlertMessage() {
         role="alert"
       >
         <FontAwesomeIcon icon={faLightbulb} />
-        <span>Para este ejemplo, utiliza el rango "Últimos 90 días".</span>
+        <span>Para este ejemplo, utiliza el rango "Último Año".</span>
       </div>
     </div>
   );

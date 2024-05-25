@@ -85,11 +85,10 @@ export default function DeviceSelector() {
       value: [subDays(startOfToday(), 30), new Date()],
     },
     {
-      id: "last90Days",
-      label: "Últimos 90 días",
-      value: [subMonths(startOfToday(), 3), new Date()],
+      id: "lastYear",
+      label: "Último Año",
+      value: [subMonths(startOfToday(), 12), new Date()],
     },
-    { id: "custom", label: "Personalizado", value: null },
   ];
 
   return (
@@ -143,25 +142,6 @@ export default function DeviceSelector() {
           isDisabled={!selectedStation}
           aria-labelledby="time-label"
         />
-        {selectedTimeRange && selectedTimeRange.id === "custom" && (
-          <>
-            <div className="fle flex-col">
-              <label htmlFor="date-picker" id="date-picker-label">
-                Selecciona un rango de fechas
-              </label>
-              <DatePicker
-                selectsRange={true}
-                startDate={selectedDates[0]}
-                endDate={selectedDates[1]}
-                onChange={handleDateChange}
-                isClearable={true}
-                placeholderText="Selecciona un rango de fechas"
-                dateFormat="yyyy-MM-dd"
-                aria-labelledby="date-picker-label"
-              />
-            </div>
-          </>
-        )}
       </div>
     </section>
   );

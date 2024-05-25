@@ -2,7 +2,7 @@ export default function LogoSection() {
   return (
     <>
       <section className="navigation__logo">
-        <a href="#" title="Logo">
+        <a href="/" title="Logo">
           <img
             src="./logo.webp"
             className="w-36"
